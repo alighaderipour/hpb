@@ -74,33 +74,38 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
-import axios from '@/api/axios'
+import { ref, onMounted } from 'vue';
+import axios from '@/config/axios';
 
-const loading = ref(false)
 const stats = ref({
-  departments: 0,
-  sections: 0,
-  staff: 0,
-  total_phones: 0
-})
+  total_departments: 0,
+  total_sections: 0,
+  total_staff: 0,
+  total_active_assignments: 0,
+});
 
-async function fetchStats() {
-  loading.value = true
+const loading = ref(true);
+const error = ref(null);
+
+const fetchStats = async () => {
+  loading.value = true;
+  error.value = null;
+  
   try {
-    const response = await axios.get('/statistics/')
-    stats.value = response.data
-  } catch (error) {
-    console.error('خطا در دریافت آمار:', error)
+    // ✅ تغییر مسیر: از /statistics/ به /api/statistics/overview/
+    const response = await axios.get('/api/statistics/overview/');
+    stats.value = response.data;
+  } catch (err) {
+    console.error('خطا در دریافت آمار:', err);
+    error.value = 'خطا در دریافت آمار';
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 
 onMounted(() => {
-  fetchStats()
-})
+  fetchStats();
+});
 </script>
 
 <style scoped>

@@ -2,7 +2,7 @@
   <div class="staff-form-view">
     <div class="page-header">
       <h1 class="page-title">
-        {{ isEditMode ? 'ویرایش پرسنل' : 'افزودن پرسنل جدید' }}
+        {{ isEditMode ? 'ویرایش بخش' : 'افزودن پرسنل جدید' }}
       </h1>
       <RouterLink to="/staff" class="btn btn-outline">
         بازگشت به لیست

@@ -26,18 +26,7 @@ class Department(models.Model):
     def __str__(self):
         return self.name
     
-    @property
-    def total_sections(self):
-        """تعداد کل سکشن‌های دپارتمان"""
-        return self.sections.filter(is_active=True).count()
     
-    @property
-    def total_staff(self):
-        """تعداد کل پرسنل فعال در دپارتمان"""
-        return StaffAssignment.objects.filter(
-            section__department=self,
-            is_current=True
-        ).count()
 
 
 class SectionType(models.Model):

@@ -59,9 +59,10 @@ class SectionTypeViewSet(viewsets.ModelViewSet):
 
 # ================== Department ViewSet ==================
 
+
 class DepartmentViewSet(viewsets.ModelViewSet):
     """API برای مدیریت دپارتمان‌ها"""
-    queryset = Department.objects.all()
+    
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['is_active']
@@ -78,8 +79,19 @@ class DepartmentViewSet(viewsets.ModelViewSet):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             return [IsAdminUser()]
         return [IsAuthenticated()]
-
-
+    
+    def get_queryset(self):
+        """
+        ✅ مسیر صحیح: sections__assignments (نه staffassignment)
+        """
+        return Department.objects.annotate(
+            total_sections=Count('sections', distinct=True),
+            total_staff=Count(
+                'sections__assignments',  # ✅ این صحیح است
+                distinct=True,
+                filter=Q(sections__assignments__is_current=True)
+            )
+        ).order_by('name')
 # ================== Section ViewSet ==================
 
 class SectionViewSet(viewsets.ModelViewSet):

@@ -41,14 +41,7 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">رئیس دپارتمان</label>
-          <input
-            v-model="form.head_name"
-            type="text"
-            class="form-control"
-          />
-        </div>
+        
 
         <div class="form-actions">
           <button type="submit" class="btn btn-primary" :disabled="loading">

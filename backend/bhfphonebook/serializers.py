@@ -42,11 +42,13 @@ class SectionTypeSerializer(serializers.ModelSerializer):
 
 # ================== Department Serializers ==================
 
+# backend/bhfphonebook/serializers.py
+
 class DepartmentListSerializer(serializers.ModelSerializer):
     """سریالایزر لیست دپارتمان‌ها"""
     
-    total_sections = serializers.IntegerField(read_only=True)  # ✅ حذف source
-    total_staff = serializers.IntegerField(read_only=True)  # ✅ حذف source
+    total_sections = serializers.IntegerField(read_only=True)
+    total_staff = serializers.IntegerField(read_only=True)
     
     class Meta:
         model = Department
@@ -56,10 +58,13 @@ class DepartmentListSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['created_at', 'updated_at']
 
+
 class DepartmentDetailSerializer(serializers.ModelSerializer):
     """سریالایزر جزئیات دپارتمان"""
-    total_sections = serializers.IntegerField(source='total_sections', read_only=True)
-    total_staff = serializers.IntegerField(source='total_staff', read_only=True)
+    
+    # ✅ حذف source - این فیلدها با annotate محاسبه می‌شوند
+    total_sections = serializers.IntegerField(read_only=True)
+    total_staff = serializers.IntegerField(read_only=True)
     
     class Meta:
         model = Department
@@ -68,6 +73,7 @@ class DepartmentDetailSerializer(serializers.ModelSerializer):
             'total_sections', 'total_staff', 'created_at', 'updated_at'
         ]
         read_only_fields = ['created_at', 'updated_at']
+
 
 
 # ================== Section Phone Serializers ==================

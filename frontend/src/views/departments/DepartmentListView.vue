@@ -52,7 +52,6 @@ const searchQuery = ref('')
 const columns = [
   { key: 'code', label: 'کد' },
   { key: 'name', label: 'نام دپارتمان' },
-  { key: 'head_name', label: 'رئیس دپارتمان' },
   { key: 'section_count', label: 'تعداد بخش‌ها' },
   { key: 'actions', label: 'عملیات' }
 ]
