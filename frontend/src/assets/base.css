@@ -1,0 +1,41 @@
+/* ===== CSS Reset & Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  direction: rtl;
+}
+
+body {
+  font-family: "Vazirmatn", "IRANSans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f4f6f8;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  color: #1f2d3d;
+}
+
+p {
+  color: #5f6c7b;
+}
+
+/* ===== Inputs ===== */
+input {
+  font-family: inherit;
+  outline: none;
+}
+
+/* ===== Utility ===== */
+.text-center {
+  text-align: center;
+}
